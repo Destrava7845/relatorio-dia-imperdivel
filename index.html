@@ -135,7 +135,10 @@
   .chart-container canvas { border-radius: 16px; }
 
   /* ===== GENDER FIGURES ===== */
-  .gender-section { display: flex; align-items: center; justify-content: center; gap: 64px; flex-wrap: wrap; margin: 48px 0; }
+  .gender-section { display: flex; align-items: flex-start; justify-content: center; gap: 64px; flex-wrap: wrap; margin: 48px 0; }
+  .gender-group { text-align: center; }
+  .gender-group-title { font-size: .75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--verde-medio); margin-bottom: 24px; }
+  .gender-figures { display: flex; align-items: center; justify-content: center; gap: 48px; }
   .gender-figure { text-align: center; }
   .gender-icon { position: relative; }
   .gender-icon svg { transition: transform .4s ease; }
@@ -288,20 +291,20 @@
   <div class="cards-grid">
     <div class="card anim" data-delay="0">
       <div class="card-accent green"></div>
-      <div class="card-label">Total de Leads</div>
-      <div class="card-number"><span class="counter" data-target="1239">0</span></div>
-      <div class="card-detail">551 no Dia Imperdível · 688 na Segunda Abordagem</div>
+      <div class="card-label">Negociações</div>
+      <div class="card-number"><span class="counter" data-target="1028">0</span></div>
+      <div class="card-detail">340 no Dia Imperdível · 688 na Segunda Abordagem</div>
     </div>
     <div class="card card-big anim" data-delay="100">
       <div class="card-label">Contratos Fechados</div>
-      <div class="card-number"><span class="counter" data-target="104">0</span></div>
-      <div class="card-detail">364 vidas vendidas no total</div>
+      <div class="card-number"><span class="counter" data-target="59">0</span></div>
+      <div class="card-detail">168 vidas vendidas no total</div>
     </div>
     <div class="card anim" data-delay="200">
       <div class="card-accent orange"></div>
       <div class="card-label orange">Receita Anual Gerada</div>
-      <div class="card-number orange">R$ <span class="counter" data-target="1196199">0</span></div>
-      <div class="card-detail">R$ 99.683/mês em contratos</div>
+      <div class="card-number orange">R$ <span class="counter" data-target="521929">0</span></div>
+      <div class="card-detail">R$ 43.494/mês em contratos</div>
     </div>
   </div>
 
@@ -309,12 +312,12 @@
     <div class="card anim" data-delay="300">
       <div class="card-accent yellow"></div>
       <div class="card-label">Em Andamento</div>
-      <div class="card-number"><span class="counter" data-target="778">0</span></div>
-      <div class="card-detail">163 no Dia Imperdível · 615 na Segunda Abordagem</div>
+      <div class="card-number"><span class="counter" data-target="746">0</span></div>
+      <div class="card-detail">negociações ainda em aberto nos dois funis</div>
     </div>
     <div class="card anim" data-delay="400">
       <div class="card-label">Perdidos</div>
-      <div class="card-number"><span class="counter" data-target="357">0</span></div>
+      <div class="card-number"><span class="counter" data-target="223">0</span></div>
       <div class="card-detail">negociações encerradas sem fechamento</div>
     </div>
     <div class="card anim" data-delay="500">
@@ -326,54 +329,29 @@
   </div>
 
   <div class="callout green anim">
-    <strong>No período da campanha (25/08–25/09):</strong> 56 contratos, 155 vidas, R$ 47.025/mês.<br>
-    <strong>Pós-campanha (26/09–08/10):</strong> +12 contratos, +58 vidas, +R$ 12.536/mês. A campanha continua convertendo.<br>
-    <em>Obs: ainda há 778 negociações em aberto e 4 contratos fechados sem valor preenchido. O resultado real é ainda maior.</em>
+    <strong>Ainda há 746 negociações em aberto</strong> e 4 contratos fechados sem valor preenchido. O resultado real é ainda maior.
   </div>
 </section>
 
-<!-- ==================== SEMANA A SEMANA ==================== -->
-<div class="section-full section-white deco-container" data-section="Semanas" style="overflow:hidden;">
+<!-- ==================== DIA A DIA ==================== -->
+<div class="section-full section-white deco-container" data-section="Dia a Dia" style="overflow:hidden;">
   <div class="deco spin-reverse" style="width:110px;height:110px;top:40px;right:30px;opacity:.25;" data-parallax="0.2"><img src="img/ICONES VETOR-02.png" alt=""></div>
   <div class="section-inner">
-    <div class="section-title">Semana a Semana</div>
+    <div class="section-title">Dia a Dia</div>
     <div class="section-heading">Picos de entrada e fechamento</div>
-    <div class="section-subtitle">Volume de leads, ganhos e perdas por semana ao longo da campanha.</div>
+    <div class="section-subtitle">Volume de negociações iniciadas, ganhas e perdidas por dia ao longo da campanha e pós-campanha.</div>
 
-    <div class="chart-container anim" style="max-width:900px;height:400px;">
-      <canvas id="chartSemanas"></canvas>
-    </div>
-
-    <div class="table-wrap anim">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Semana</th>
-            <th class="num">Iniciados</th>
-            <th class="num">Ganhos</th>
-            <th class="num">Perdidos</th>
-            <th class="num">Taxa de Ganho</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>25–31/08</td><td class="num bold">272</td><td class="num">7</td><td class="num">29</td><td class="num">2,6%</td></tr>
-          <tr><td>01–07/09</td><td class="num bold">220</td><td class="num">8</td><td class="num">57</td><td class="num">3,6%</td></tr>
-          <tr><td>08–14/09</td><td class="num bold">224</td><td class="num">16</td><td class="num">21</td><td class="num">7,1%</td></tr>
-          <tr><td>15–21/09</td><td class="num bold">197</td><td class="num">16</td><td class="num">55</td><td class="num">8,1%</td></tr>
-          <tr><td>22–25/09 <span class="tag tag-orange">4 dias</span></td><td class="num bold">91</td><td class="num">9</td><td class="num">74</td><td class="num">9,9%</td></tr>
-          <tr style="background:#FFF9EC;"><td>26/09–08/10 <span class="tag tag-green">pós-campanha</span></td><td class="num bold">24</td><td class="num">12</td><td class="num">37</td><td class="num">50,0%</td></tr>
-          <tr class="row-total"><td>Total</td><td class="num">1.028</td><td class="num">68</td><td class="num">273</td><td class="num">6,6%</td></tr>
-        </tbody>
-      </table>
+    <div class="chart-container anim" style="max-width:960px;height:420px;">
+      <canvas id="chartDiario"></canvas>
     </div>
 
     <div class="callout yellow anim">
-      <strong>A taxa de ganho subiu a cada semana.</strong> Leads que entraram primeiro tiveram mais tempo para amadurecer. No pós-campanha, 50% dos fechamentos vieram de leads que já estavam no funil. O ciclo médio de venda é de 22 dias.
+      <strong>A taxa de ganho subiu a cada semana.</strong> Leads que entraram primeiro tiveram mais tempo para amadurecer. No pós-campanha, os fechamentos vieram de leads que já estavam no funil. O ciclo médio de venda é de 22 dias.
     </div>
   </div>
 </div>
 
-<!-- ==================== MARKETING vs COMERCIAL ==================== -->
+<!-- ==================== MARKETING e COMERCIAL ==================== -->
 <div class="section-full section-dark deco-container" data-section="Marketing e Comercial" style="overflow:hidden;">
   <div class="deco spin" style="width:130px;height:130px;top:60px;left:-30px;opacity:.3;" data-parallax="0.15"><img src="img/ICONES VETOR-05.png" alt=""></div>
   <div class="deco pulse" style="width:90px;height:90px;bottom:80px;right:20px;opacity:.28;" data-parallax="0.25"><img src="img/ICONES VETOR-04.png" alt=""></div>
@@ -393,23 +371,23 @@
         </div>
         <div class="progress-mini" style="margin-top:20px;">
           <span style="font-size:.75rem;font-weight:600;">Participação</span>
-          <div class="progress-track"><div class="progress-fill green" data-width="18%"></div></div>
-          <span class="progress-pct">18%</span>
+          <div class="progress-track"><div class="progress-fill green" data-width="32%"></div></div>
+          <span class="progress-pct">32%</span>
         </div>
         <p style="margin-top:12px;font-size:.82rem;color:var(--cinza-texto);">~516 leads · R$ 6.095 investidos · CPL R$ 11,81</p>
       </div>
       <div class="split-box anim from-right" style="border-top:4px solid var(--laranja);">
         <div class="card-label orange">Comercial · Outras Origens</div>
-        <div style="font-size:3rem;font-weight:900;color:var(--verde-escuro);margin:16px 0 4px;">83 <span style="font-size:1rem;font-weight:400;color:var(--cinza-texto)">contratos</span></div>
+        <div style="font-size:3rem;font-weight:900;color:var(--verde-escuro);margin:16px 0 4px;">40 <span style="font-size:1rem;font-weight:400;color:var(--cinza-texto)">contratos</span></div>
         <div class="kpi-row">
-          <div class="kpi"><div class="kpi-value">320</div><div class="kpi-label">Vidas</div></div>
-          <div class="kpi"><div class="kpi-value" style="color:var(--laranja);">R$ 1.070.832</div><div class="kpi-label">Anual</div></div>
+          <div class="kpi"><div class="kpi-value">124</div><div class="kpi-label">Vidas</div></div>
+          <div class="kpi"><div class="kpi-value" style="color:var(--laranja);">R$ 396.564</div><div class="kpi-label">Anual</div></div>
           <div class="kpi"><div class="kpi-value">—</div><div class="kpi-label">ROI</div></div>
         </div>
         <div class="progress-mini" style="margin-top:20px;">
           <span style="font-size:.75rem;font-weight:600;">Participação</span>
-          <div class="progress-track"><div class="progress-fill orange" data-width="82%"></div></div>
-          <span class="progress-pct">82%</span>
+          <div class="progress-track"><div class="progress-fill orange" data-width="68%"></div></div>
+          <span class="progress-pct">68%</span>
         </div>
         <p style="margin-top:12px;font-size:.82rem;color:var(--cinza-texto);">Indicação, telefone, presencial, prospecção e WhatsApp</p>
       </div>
@@ -428,7 +406,7 @@
 <!-- ==================== PLATAFORMAS ==================== -->
 <section data-section="Plataformas">
   <div class="section-title">Investimento por Plataforma</div>
-  <div class="section-heading">Meta vs Google</div>
+  <div class="section-heading">Meta e Google</div>
   <div class="section-subtitle">Distribuição da verba, volume de leads e resultado de cada canal.</div>
 
   <div class="split">
@@ -440,7 +418,16 @@
       <div class="kpi-row">
         <div class="kpi"><div class="kpi-value">591</div><div class="kpi-label">Leads</div></div>
         <div class="kpi"><div class="kpi-value">R$ 6,10</div><div class="kpi-label">CPL</div></div>
-        <div class="kpi"><div class="kpi-value" style="color:var(--verde-medio);">18</div><div class="kpi-label">Vendas</div></div>
+        <div class="kpi"><div class="kpi-value" style="color:var(--verde-medio);">19</div><div class="kpi-label">Vendas</div></div>
+      </div>
+      <div class="kpi-row" style="margin-top:8px;border-top:1px solid #EDF2F7;padding-top:16px;">
+        <div class="kpi"><div class="kpi-value" style="font-size:1.1rem;">232.223</div><div class="kpi-label">Alcance</div></div>
+        <div class="kpi"><div class="kpi-value" style="font-size:1.1rem;">323.006</div><div class="kpi-label">Impressões</div></div>
+        <div class="kpi"><div class="kpi-value" style="font-size:1.1rem;">1,39</div><div class="kpi-label">Frequência</div></div>
+      </div>
+      <div class="kpi-row" style="margin-top:4px;">
+        <div class="kpi"><div class="kpi-value" style="font-size:1.1rem;">1,57%</div><div class="kpi-label">CTR</div></div>
+        <div class="kpi"><div class="kpi-value" style="font-size:1.1rem;">R$ 0,71</div><div class="kpi-label">CPC</div></div>
       </div>
     </div>
     <div class="split-box anim from-right" style="border-top:4px solid var(--laranja);">
@@ -452,6 +439,14 @@
         <div class="kpi"><div class="kpi-value">11</div><div class="kpi-label">Leads</div></div>
         <div class="kpi"><div class="kpi-value">R$ 226</div><div class="kpi-label">CPL</div></div>
         <div class="kpi"><div class="kpi-value" style="color:var(--cinza-texto);">—</div><div class="kpi-label">Vendas</div></div>
+      </div>
+      <div class="kpi-row" style="margin-top:8px;border-top:1px solid #EDF2F7;padding-top:16px;">
+        <div class="kpi"><div class="kpi-value" style="font-size:1.1rem;">29.572</div><div class="kpi-label">Impressões</div></div>
+        <div class="kpi"><div class="kpi-value" style="font-size:1.1rem;">1.311</div><div class="kpi-label">Cliques</div></div>
+        <div class="kpi"><div class="kpi-value" style="font-size:1.1rem;">4,43%</div><div class="kpi-label">CTR</div></div>
+      </div>
+      <div class="kpi-row" style="margin-top:4px;">
+        <div class="kpi"><div class="kpi-value" style="font-size:1.1rem;">R$ 1,90</div><div class="kpi-label">CPC</div></div>
       </div>
     </div>
   </div>
@@ -466,74 +461,70 @@
   <div class="deco spin-reverse" style="width:100px;height:100px;bottom:40px;left:20px;opacity:.25;" data-parallax="0.2"><img src="img/ICONES VETOR-10.png" alt=""></div>
   <div class="deco" style="width:80px;height:80px;top:30px;right:-10px;opacity:.22;transform:rotate(-15deg);" data-parallax="0.3"><img src="img/ICONES VETOR-01.png" alt=""></div>
   <div class="section-inner">
-    <div class="section-title">Perfil dos Leads</div>
+    <div class="section-title">Perfil das Negociações</div>
     <div class="section-heading">Quem respondeu à campanha</div>
-    <div class="section-subtitle">Distribuição por gênero e faixa etária dos leads gerados pela campanha.</div>
+    <div class="section-subtitle">Distribuição por gênero e faixa etária das negociações geradas pela campanha.</div>
 
-    <!-- BONEQUINHOS -->
+    <!-- SILHOUETTES SIDE BY SIDE -->
     <div class="gender-section anim from-scale">
-      <div class="gender-figure">
-        <div class="gender-icon">
-          <svg width="100" height="140" viewBox="0 0 100 140">
-            <!-- Mulher -->
-            <circle cx="50" cy="24" r="18" fill="var(--verde-medio)" opacity="0.15"/>
-            <circle cx="50" cy="24" r="14" fill="var(--verde-medio)"/>
-            <circle cx="45" cy="22" r="1.5" fill="white"/>
-            <circle cx="55" cy="22" r="1.5" fill="white"/>
-            <path d="M45 28 Q50 32 55 28" stroke="white" stroke-width="1.5" fill="none"/>
-            <!-- Corpo (vestido) -->
-            <path d="M35 44 L30 110 Q50 118 70 110 L65 44 Q50 50 35 44Z" fill="var(--verde-medio)"/>
-            <!-- Braços -->
-            <path d="M35 48 L20 80" stroke="var(--verde-medio)" stroke-width="6" stroke-linecap="round"/>
-            <path d="M65 48 L80 80" stroke="var(--verde-medio)" stroke-width="6" stroke-linecap="round"/>
-            <!-- Pernas -->
-            <line x1="42" y1="110" x2="40" y2="136" stroke="var(--verde-medio)" stroke-width="5" stroke-linecap="round"/>
-            <line x1="58" y1="110" x2="60" y2="136" stroke="var(--verde-medio)" stroke-width="5" stroke-linecap="round"/>
-            <!-- Cabelo -->
-            <path d="M32 20 Q30 8 50 6 Q70 8 68 20" stroke="var(--verde-escuro)" stroke-width="4" fill="none"/>
-            <path d="M32 20 L28 38" stroke="var(--verde-escuro)" stroke-width="3" stroke-linecap="round"/>
-            <path d="M68 20 L72 38" stroke="var(--verde-escuro)" stroke-width="3" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="gender-pct fem"><span class="counter" data-target="62" data-suffix=",6%">0</span></div>
-        <div class="gender-label">Feminino</div>
-      </div>
+      <div class="gender-group">
+        <div class="gender-group-title">Negociações</div>
+        <div class="gender-figures">
+          <div class="gender-figure">
+            <div class="gender-icon">
+              <svg width="80" height="130" viewBox="0 0 80 130">
+                <!-- Woman silhouette -->
+                <circle cx="40" cy="18" r="14" fill="var(--verde-medio)"/>
+                <!-- Hair -->
+                <path d="M24 14 C24 4, 56 4, 56 14 L56 22 C56 22, 58 14, 54 10 C50 6, 30 6, 26 10 C22 14, 24 22, 24 22 Z" fill="var(--verde-escuro)"/>
+                <path d="M24 18 C22 28, 22 36, 26 38" stroke="var(--verde-escuro)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M56 18 C58 28, 58 36, 54 38" stroke="var(--verde-escuro)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <!-- Body / dress -->
+                <path d="M32 32 C32 32, 28 42, 24 70 L24 100 C24 102, 26 104, 28 104 L52 104 C54 104, 56 102, 56 100 L56 70 C52 42, 48 32, 48 32 Z" fill="var(--verde-medio)"/>
+                <!-- Waist shape -->
+                <path d="M30 52 C30 52, 40 48, 50 52" stroke="var(--verde-escuro)" stroke-width="1" fill="none" opacity="0.3"/>
+                <!-- Arms -->
+                <path d="M32 36 C26 44, 20 60, 18 68" stroke="var(--verde-medio)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M48 36 C54 44, 60 60, 62 68" stroke="var(--verde-medio)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Legs -->
+                <line x1="34" y1="104" x2="32" y2="126" stroke="var(--verde-medio)" stroke-width="5" stroke-linecap="round"/>
+                <line x1="46" y1="104" x2="48" y2="126" stroke="var(--verde-medio)" stroke-width="5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="gender-pct fem"><span class="counter" data-target="62" data-suffix=",6%">0</span></div>
+            <div class="gender-label">Feminino</div>
+          </div>
 
-      <div style="font-size:2rem;color:#CBD5E0;font-weight:300;">vs</div>
-
-      <div class="gender-figure">
-        <div class="gender-icon">
-          <svg width="100" height="140" viewBox="0 0 100 140">
-            <!-- Homem -->
-            <circle cx="50" cy="24" r="18" fill="var(--laranja)" opacity="0.15"/>
-            <circle cx="50" cy="24" r="14" fill="var(--laranja)"/>
-            <circle cx="45" cy="22" r="1.5" fill="white"/>
-            <circle cx="55" cy="22" r="1.5" fill="white"/>
-            <path d="M45 28 Q50 32 55 28" stroke="white" stroke-width="1.5" fill="none"/>
-            <!-- Corpo (camiseta) -->
-            <rect x="34" y="44" width="32" height="40" rx="4" fill="var(--laranja)"/>
-            <!-- Braços -->
-            <path d="M34 48 L18 78" stroke="var(--laranja)" stroke-width="6" stroke-linecap="round"/>
-            <path d="M66 48 L82 78" stroke="var(--laranja)" stroke-width="6" stroke-linecap="round"/>
-            <!-- Calça -->
-            <rect x="36" y="82" width="12" height="36" rx="4" fill="var(--laranja-escuro)"/>
-            <rect x="52" y="82" width="12" height="36" rx="4" fill="var(--laranja-escuro)"/>
-            <!-- Cabelo curto -->
-            <path d="M34 18 Q34 6 50 5 Q66 6 66 18" fill="var(--cinza-escuro)"/>
-          </svg>
+          <div class="gender-figure">
+            <div class="gender-icon">
+              <svg width="80" height="130" viewBox="0 0 80 130">
+                <!-- Man silhouette -->
+                <circle cx="40" cy="18" r="14" fill="var(--laranja)"/>
+                <!-- Short hair -->
+                <path d="M26 16 C26 6, 54 6, 54 16 L54 12 C54 4, 26 4, 26 12 Z" fill="var(--cinza-escuro)"/>
+                <!-- Body / torso -->
+                <path d="M28 32 C28 32, 26 38, 24 50 L22 100 C22 102, 24 104, 26 104 L54 104 C56 104, 58 102, 58 100 L56 50 C54 38, 52 32, 52 32 Z" fill="var(--laranja)"/>
+                <!-- Shoulders -->
+                <path d="M28 32 C24 34, 18 40, 16 48" stroke="var(--laranja)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M52 32 C56 34, 62 40, 64 48" stroke="var(--laranja)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Arms -->
+                <path d="M16 48 C14 56, 16 64, 18 70" stroke="var(--laranja)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M64 48 C66 56, 64 64, 62 70" stroke="var(--laranja)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <!-- Legs -->
+                <rect x="28" y="104" width="10" height="22" rx="4" fill="var(--laranja-escuro)"/>
+                <rect x="42" y="104" width="10" height="22" rx="4" fill="var(--laranja-escuro)"/>
+              </svg>
+            </div>
+            <div class="gender-pct masc"><span class="counter" data-target="37" data-suffix=",2%">0</span></div>
+            <div class="gender-label">Masculino</div>
+          </div>
         </div>
-        <div class="gender-pct masc"><span class="counter" data-target="37" data-suffix=",2%">0</span></div>
-        <div class="gender-label">Masculino</div>
       </div>
     </div>
 
     <!-- GRÁFICO FAIXA ETÁRIA -->
     <div class="chart-container anim" style="max-width:800px;height:380px;">
       <canvas id="chartIdade"></canvas>
-    </div>
-
-    <div class="callout green anim">
-      <strong>Mulheres de 25 a 44 anos</strong> concentram a conversão: sozinhas, representam 4 em cada 10 leads gerados. O público feminino lidera em todas as faixas até os 54 anos, refletindo seu papel de decisão sobre a saúde da família.
     </div>
   </div>
 </div>
@@ -548,27 +539,27 @@
 
     <div class="funnel">
       <div class="funnel-step anim" data-delay="0">
-        <div class="funnel-number"><span class="counter" data-target="1239">0</span></div>
-        <div class="funnel-label">Leads nos funis</div>
+        <div class="funnel-number"><span class="counter" data-target="1028">0</span></div>
+        <div class="funnel-label">Negociações nos funis</div>
         <div class="funnel-detail">ambos os funis da campanha</div>
       </div>
       <div class="funnel-arrow anim" data-delay="150">→</div>
       <div class="funnel-step anim" data-delay="200">
-        <div class="funnel-number"><span class="counter" data-target="551">0</span></div>
+        <div class="funnel-number"><span class="counter" data-target="340">0</span></div>
         <div class="funnel-label">Funil Dia Imperdível</div>
         <div class="funnel-detail">leads qualificados para venda</div>
       </div>
       <div class="funnel-arrow anim" data-delay="350">→</div>
       <div class="funnel-step anim" data-delay="400">
-        <div class="funnel-number"><span class="counter" data-target="104">0</span></div>
+        <div class="funnel-number"><span class="counter" data-target="59">0</span></div>
         <div class="funnel-label">Contratos fechados</div>
         <div class="funnel-detail">todas as origens</div>
       </div>
       <div class="funnel-arrow anim" data-delay="550">→</div>
       <div class="funnel-step final anim" data-delay="600">
-        <div class="funnel-number"><span class="counter" data-target="364">0</span></div>
+        <div class="funnel-number"><span class="counter" data-target="168">0</span></div>
         <div class="funnel-label">Vidas vendidas</div>
-        <div class="funnel-detail">R$ 99.683/mês</div>
+        <div class="funnel-detail">R$ 43.494/mês</div>
       </div>
     </div>
 
@@ -587,7 +578,7 @@
 <section data-section="Perdas">
   <div class="section-title">Por que Perdemos</div>
   <div class="section-heading">Motivos de perda nos negócios do site</div>
-  <div class="section-subtitle">80 perdas registradas no período. O motivo é registrado pelo consultor ao encerrar o negócio.</div>
+  <div class="section-subtitle">178 perdas registradas nos negócios do site. O motivo é registrado pelo consultor ao encerrar o negócio.</div>
 
   <div class="split">
     <div class="chart-container anim from-left" style="height:340px;">
@@ -595,16 +586,16 @@
     </div>
     <div class="anim from-right" style="display:flex;flex-direction:column;gap:16px;">
       <div class="split-box" style="flex:1;">
-        <h3>Metade é falta de retorno</h3>
-        <p>O consultor tentou e a pessoa não respondeu. É volume de contato, não qualidade de lead.</p>
+        <h3>Mais da metade é falta de retorno</h3>
+        <p>99 perdas (56%). O consultor tentou e a pessoa não respondeu. É volume de contato, não qualidade de lead.</p>
       </div>
       <div class="split-box" style="flex:1;border-left:4px solid var(--laranja);">
-        <h3 class="orange">Elegibilidade é o alvo da mídia</h3>
-        <p>17 das 18 perdas por elegibilidade vieram do site. Segmentação e texto de anúncio conseguem reduzir.</p>
+        <h3 class="orange">Elegibilidade e duplicados somam 21%</h3>
+        <p>20 perdas por elegibilidade (11%) e 17 por lead duplicado (10%). Segmentação e deduplicação no site conseguem reduzir.</p>
       </div>
       <div class="split-box" style="flex:1;">
-        <h3>30 das 80 perdas são de perfil</h3>
-        <p>Somando elegibilidade, dados incorretos, área de atendimento e regras. É o que segmentação e copy resolvem.</p>
+        <h3>Preço e falta de movimentação</h3>
+        <p>9 perdas por preço da mensalidade (5%) e 6 por falta de movimentação (3%). Dados incorretos responderam por 4%.</p>
       </div>
     </div>
   </div>
@@ -648,7 +639,7 @@
 
   <ul class="obs-list">
     <li class="anim"><strong>4 contratos sem valor preenchido:</strong> 3 do tráfego pago (6 vidas) e a Phitofarma (15 vidas). A mensalidade real da campanha é maior do que o registrado no Agendor.</li>
-    <li class="anim"><strong>Segunda Abordagem sem fechamento:</strong> 615 negócios em andamento neste funil. São cadastros incompletos e já clientes que simularam. Nenhum foi ganho até agora. Oportunidade de ação comercial.</li>
+    <li class="anim"><strong>746 negociações em aberto:</strong> entre os dois funis, há negociações em andamento que ainda podem converter. O resultado final será maior.</li>
     <li class="anim"><strong>Duplicatas no funil:</strong> ART FINAL (Murilo, 4 vidas) e Phitofarma (Gabriel, 15 vidas) simularam no site, mas o vendedor fechou em negócio manual. O do site ficou aberto. Pode haver mais casos não identificáveis.</li>
     <li class="anim"><strong>Ciclo de venda de 22 dias:</strong> campanha de 32 dias entrega resultado depois que a mídia já parou, subnotificando o próprio desempenho.</li>
   </ul>
@@ -835,24 +826,76 @@ function chartOnScroll(canvas, config) {
   io.observe(canvas);
 }
 
-// -- Semanas --
-chartOnScroll(document.getElementById('chartSemanas'), {
-  type: 'bar',
+// -- Dia a Dia (line chart) --
+chartOnScroll(document.getElementById('chartDiario'), {
+  type: 'line',
   data: {
-    labels: ['25-31/08', '01-07/09', '08-14/09', '15-21/09', '22-25/09', '26/09-08/10'],
+    labels: [
+      '25/08','26/08','27/08','28/08','29/08','30/08','31/08',
+      '01/09','02/09','03/09','04/09','05/09','06/09','07/09',
+      '08/09','09/09','10/09','11/09','12/09','13/09','14/09',
+      '15/09','16/09','17/09','18/09','19/09','20/09','21/09',
+      '22/09','23/09','24/09','25/09',
+      '26/09','27/09','28/09','29/09','30/09',
+      '01/10','04/10','06/10'
+    ],
     datasets: [
-      { label: 'Iniciados', data: [272,220,224,197,91,24], backgroundColor: '#00594C', borderRadius: 6, borderSkipped: false },
-      { label: 'Ganhos', data: [7,8,16,16,9,12], backgroundColor: '#007A66', borderRadius: 6, borderSkipped: false },
-      { label: 'Perdidos', data: [29,57,21,55,74,37], backgroundColor: '#F28C28', borderRadius: 6, borderSkipped: false }
+      {
+        label: 'Iniciados',
+        data: [16,45,59,37,41,41,33, 37,55,33,14,26,29,26, 26,52,39,18,20,31,38, 30,32,27,22,25,26,35, 16,37,18,20, 8,13,3,0,0, 0,0,0],
+        borderColor: '#00594C', backgroundColor: 'rgba(0,89,76,0.08)',
+        borderWidth: 2.5, pointRadius: 2, pointHoverRadius: 6,
+        pointBackgroundColor: '#00594C', pointBorderColor: '#fff', pointBorderWidth: 1.5,
+        fill: true, tension: 0.3
+      },
+      {
+        label: 'Ganhos',
+        data: [0,0,3,0,0,1,0, 0,1,4,0,0,0,2, 1,1,4,0,0,6,3, 4,4,1,0,0,0,6, 3,2,4,0, 0,2,4,1,1, 1,0,0],
+        borderColor: '#007A66', backgroundColor: 'rgba(0,122,102,0.06)',
+        borderWidth: 2.5, pointRadius: 2, pointHoverRadius: 6,
+        pointBackgroundColor: '#007A66', pointBorderColor: '#fff', pointBorderWidth: 1.5,
+        fill: false, tension: 0.3
+      },
+      {
+        label: 'Perdidos',
+        data: [1,2,0,0,0,3,12, 23,3,12,0,0,0,1, 4,9,1,0,0,1,3, 18,0,23,0,0,4,1, 10,19,42,0, 0,2,3,1,10, 5,8,2],
+        borderColor: '#F28C28', backgroundColor: 'rgba(242,140,40,0.06)',
+        borderWidth: 2, borderDash: [4,3], pointRadius: 2, pointHoverRadius: 6,
+        pointBackgroundColor: '#F28C28', pointBorderColor: '#fff', pointBorderWidth: 1.5,
+        fill: false, tension: 0.3
+      }
     ]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    animation: delayedBarAnimation(6),
-    plugins: { datalabels: { display: false }, legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
-      tooltip: { backgroundColor: '#00594C', titleFont: { weight: 'bold' }, bodySpacing: 6, padding: 14, cornerRadius: 10 }
+    animation: {
+      x: { duration: 2500, easing: 'easeOutQuart' },
+      y: { duration: 1800, easing: 'easeOutQuart' }
     },
-    scales: { y: { beginAtZero: true, grid: { color: '#EDF2F7' } }, x: { grid: { display: false } } }
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      datalabels: { display: false },
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
+      tooltip: {
+        backgroundColor: '#00594C', titleFont: { weight: 'bold' }, bodySpacing: 6, padding: 14, cornerRadius: 10,
+        callbacks: {
+          title: function(items) { return items[0].label; }
+        }
+      }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: '#EDF2F7' }, title: { display: true, text: 'Negociações', color: '#4A5568', font: { size: 11 } } },
+      x: {
+        grid: { display: false },
+        ticks: {
+          maxRotation: 45, minRotation: 45, font: { size: 10 },
+          callback: function(val, idx) {
+            // Show every 3rd label to avoid clutter
+            return idx % 3 === 0 ? this.getLabelForValue(val) : '';
+          }
+        }
+      }
+    }
   }
 });
 
@@ -860,8 +903,8 @@ chartOnScroll(document.getElementById('chartSemanas'), {
 chartOnScroll(document.getElementById('chartPizza'), {
   type: 'doughnut',
   data: {
-    labels: ['Comercial (83)', 'Marketing (19)', 'Duplicatas (2)'],
-    datasets: [{ data: [83, 19, 2], backgroundColor: ['#F28C28', '#007A66', '#C8E64C'], borderWidth: 3, borderColor: '#00594C', hoverOffset: 16 }]
+    labels: ['Comercial (40)', 'Marketing (19)'],
+    datasets: [{ data: [40, 19], backgroundColor: ['#F28C28', '#007A66'], borderWidth: 3, borderColor: '#00594C', hoverOffset: 16 }]
   },
   options: {
     responsive: true, maintainAspectRatio: false, cutout: '58%',
@@ -937,10 +980,10 @@ chartOnScroll(document.getElementById('chartEtapas'), {
 chartOnScroll(document.getElementById('chartPerdas'), {
   type: 'doughnut',
   data: {
-    labels: ['Falta de retorno (40)', 'Elegibilidade (17)', 'Outros perfil (13)', 'Negociação/preço (8)', 'Falta movimentação (2)'],
+    labels: ['Falta de retorno (99)', 'Elegibilidade (20)', 'Lead Duplicado (17)', 'Preço Mensalidade (9)', 'Dados Incorretos (7)', 'Falta Movimentação (6)', 'Outros (20)'],
     datasets: [{
-      data: [40, 17, 13, 8, 2],
-      backgroundColor: ['#00594C', '#F28C28', '#007A66', '#A8DBC5', '#C8E64C'],
+      data: [99, 20, 17, 9, 7, 6, 20],
+      backgroundColor: ['#00594C', '#F28C28', '#007A66', '#A8DBC5', '#C8E64C', '#82CCAE', '#E07B1A'],
       borderWidth: 3, borderColor: '#fff', hoverOffset: 14
     }]
   },
@@ -948,8 +991,8 @@ chartOnScroll(document.getElementById('chartPerdas'), {
     responsive: true, maintainAspectRatio: false, cutout: '50%',
     animation: { animateRotate: true, duration: 2000, easing: 'easeOutQuart' },
     plugins: {
-      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 12, font: { size: 11 } } },
-      datalabels: { color: '#fff', font: { weight: 'bold', size: 14 }, formatter: (v) => v },
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 10, font: { size: 10 } } },
+      datalabels: { color: '#fff', font: { weight: 'bold', size: 13 }, formatter: (v) => v },
       tooltip: { backgroundColor: '#00594C', padding: 14, cornerRadius: 10 }
     }
   }
