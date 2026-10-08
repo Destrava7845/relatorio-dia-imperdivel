@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Dia Imperdível · Unimed Araçatuba</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+  @font-face { font-family: 'Unimed Sans'; src: url('fonts/UnimedSans2020-Lg.otf') format('opentype'); font-weight: 300; font-display: swap; }
+  @font-face { font-family: 'Unimed Sans'; src: url('fonts/UnimedSans2020-Rg.otf') format('opentype'); font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Unimed Sans'; src: url('fonts/UnimedSans2020-Bk.otf') format('opentype'); font-weight: 500; font-display: swap; }
+  @font-face { font-family: 'Unimed Sans'; src: url('fonts/UnimedSans2020-Sb.otf') format('opentype'); font-weight: 600; font-display: swap; }
+  @font-face { font-family: 'Unimed Sans'; src: url('fonts/UnimedSans2020-Bd.otf') format('opentype'); font-weight: 700; font-display: swap; }
+  @font-face { font-family: 'Unimed Sans'; src: url('fonts/UnimedSans2020-Xb.otf') format('opentype'); font-weight: 800; font-display: swap; }
+  @font-face { font-family: 'Unimed Sans'; src: url('fonts/UnimedSans2020-Blk.otf') format('opentype'); font-weight: 900; font-display: swap; }
+
+  :root {
+    --verde-escuro: #00594C;
+    --verde-medio: #007A66;
+    --verde-claro: #E8F5F0;
+    --verde-light: #A8DBC5;
+    --laranja: #F28C28;
+    --laranja-escuro: #E07B1A;
+    --amarelo: #C8E64C;
+    --branco: #FFFFFF;
+    --cinza-bg: #F5F7F6;
+    --cinza-texto: #4A5568;
+    --cinza-escuro: #2D3748;
+    --vermelho: #E53E3E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Unimed Sans', 'Inter', sans-serif; background: var(--cinza-bg); color: var(--cinza-escuro); overflow-x: hidden; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--verde-escuro) 0%, #004D42 40%, var(--verde-medio) 100%);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 60px 24px; position: relative; overflow: hidden;
+  }
+  .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .hero-particle {
+    position: absolute; width: 4px; height: 4px; background: rgba(200,230,76,0.3);
+    border-radius: 50%; animation: float linear infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+  .hero-logo { font-size: 1.1rem; font-weight: 700; color: var(--branco); letter-spacing: 3px; text-transform: uppercase; opacity: 0; animation: fadeInDown .8s .2s forwards; }
+  .hero-sub { font-size: .85rem; color: rgba(255,255,255,.6); margin-bottom: 48px; opacity: 0; animation: fadeInDown .8s .4s forwards; }
+  .hero-bar { width: 80px; height: 4px; background: var(--amarelo); border-radius: 2px; margin-bottom: 40px; opacity: 0; animation: scaleIn .6s .5s forwards; }
+  .hero h1 { font-size: clamp(2.5rem,6vw,5rem); font-weight: 900; color: var(--branco); line-height: 1.05; margin-bottom: 12px; opacity: 0; animation: fadeInUp 1s .6s forwards; position: relative; z-index: 1; }
+  .hero h2 { font-size: clamp(1.5rem,3.5vw,3rem); font-weight: 300; color: var(--branco); margin-bottom: 32px; opacity: 0; animation: fadeInUp 1s .8s forwards; position: relative; z-index: 1; }
+  .hero-tags { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; opacity: 0; animation: fadeInUp 1s 1s forwards; position: relative; z-index: 1; }
+  .hero-tag { background: rgba(255,255,255,.1); color: var(--amarelo); padding: 8px 22px; border-radius: 100px; font-size: .82rem; font-weight: 600; backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.08); }
+  .hero-date { color: rgba(255,255,255,.5); font-size: .88rem; opacity: 0; animation: fadeInUp 1s 1.2s forwards; position: relative; z-index: 1; }
+  .scroll-cta { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.35); font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; animation: bounce 2.5s infinite; z-index: 1; }
+  .scroll-cta::after { content: ''; display: block; width: 1px; height: 32px; background: rgba(255,255,255,.2); margin: 8px auto 0; }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes scaleIn { from{opacity:0;transform:scaleX(0)} to{opacity:1;transform:scaleX(1)} }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 90px 24px; max-width: 1200px; margin: 0 auto; }
+  .section-full { max-width: 100%; padding: 90px 24px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-dark { background: var(--verde-escuro); }
+  .section-white { background: var(--branco); }
+  .section-title { font-size: .75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--verde-medio); margin-bottom: 8px; }
+  .section-dark .section-title { color: var(--amarelo); }
+  .section-heading { font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 800; color: var(--verde-escuro); margin-bottom: 12px; line-height: 1.2; }
+  .section-dark .section-heading { color: var(--branco); }
+  .section-subtitle { font-size: 1rem; color: var(--cinza-texto); margin-bottom: 40px; line-height: 1.6; max-width: 700px; }
+  .section-dark .section-subtitle { color: rgba(255,255,255,.6); }
+
+  /* ===== ANIMATE ON SCROLL ===== */
+  .anim { opacity: 0; transform: translateY(30px); transition: all .7s cubic-bezier(.16,1,.3,1); }
+  .anim.from-left { transform: translateX(-40px); }
+  .anim.from-right { transform: translateX(40px); }
+  .anim.from-scale { transform: scale(.85); }
+  .anim.visible { opacity: 1; transform: translate(0) scale(1); }
+
+  /* ===== CARDS ===== */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 24px; margin-bottom: 32px; }
+  .card {
+    background: var(--branco); border-radius: 20px; padding: 32px; position: relative; overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05); transition: transform .4s ease, box-shadow .4s ease;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,89,76,.1); }
+  .card-accent { position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+  .card-accent.green { background: linear-gradient(90deg, var(--verde-escuro), var(--verde-medio)); }
+  .card-accent.orange { background: linear-gradient(90deg, var(--laranja), var(--laranja-escuro)); }
+  .card-accent.yellow { background: var(--amarelo); }
+  .card-label { font-size: .7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--verde-medio); margin-bottom: 10px; }
+  .card-label.orange { color: var(--laranja); }
+  .card-number { font-size: clamp(2rem,4vw,3rem); font-weight: 900; color: var(--verde-escuro); line-height: 1; margin-bottom: 8px; }
+  .card-number.orange { color: var(--laranja); }
+  .card-number.white { color: var(--branco); }
+  .card-detail { font-size: .85rem; color: var(--cinza-texto); line-height: 1.5; }
+  .card-big { background: linear-gradient(135deg, var(--verde-escuro), var(--verde-medio)); color: var(--branco); }
+  .card-big .card-label { color: var(--amarelo); }
+  .card-big .card-number { color: var(--branco); }
+  .card-big .card-detail { color: rgba(255,255,255,.7); }
+
+  /* ===== CALLOUT ===== */
+  .callout { border-radius: 14px; padding: 24px 28px; margin: 32px 0; font-size: .88rem; line-height: 1.7; border-left: 4px solid; }
+  .callout.yellow { background: #FFF9EC; border-color: var(--laranja); color: var(--cinza-escuro); }
+  .callout.green { background: var(--verde-claro); border-color: var(--verde-medio); }
+  .callout.red { background: #FFF0F0; border-color: var(--vermelho); }
+  .callout.dark { background: rgba(255,255,255,.06); border-color: var(--amarelo); color: rgba(255,255,255,.85); }
+  .callout strong { color: var(--verde-escuro); }
+  .callout.dark strong { color: var(--amarelo); }
+
+  /* ===== SPLIT ===== */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 32px 0; }
+  .split-3 { grid-template-columns: repeat(3,1fr); }
+  @media(max-width:900px) { .split, .split-3 { grid-template-columns: 1fr; } }
+  .split-box { background: var(--branco); border-radius: 20px; padding: 36px; box-shadow: 0 1px 4px rgba(0,0,0,.05); transition: transform .4s ease, box-shadow .4s ease; }
+  .split-box:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,89,76,.08); }
+  .split-box h3 { font-size: 1.25rem; font-weight: 800; color: var(--verde-escuro); margin-bottom: 16px; }
+  .split-box h3.orange { color: var(--laranja); }
+  .split-box h3.yellow { color: var(--amarelo); }
+  .split-box p { font-size: .88rem; color: var(--cinza-texto); line-height: 1.7; margin-bottom: 10px; }
+  .split-box.dark { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); }
+  .split-box.dark p { color: rgba(255,255,255,.7); }
+
+  /* ===== CHART CONTAINERS ===== */
+  .chart-container { position: relative; margin: 32px auto; max-width: 100%; }
+  .chart-container canvas { border-radius: 16px; }
+
+  /* ===== GENDER FIGURES ===== */
+  .gender-section { display: flex; align-items: center; justify-content: center; gap: 64px; flex-wrap: wrap; margin: 48px 0; }
+  .gender-figure { text-align: center; }
+  .gender-icon { position: relative; }
+  .gender-icon svg { transition: transform .4s ease; }
+  .gender-icon:hover svg { transform: scale(1.08); }
+  .gender-pct { font-size: 2.2rem; font-weight: 900; margin-top: 12px; line-height: 1; }
+  .gender-pct.fem { color: var(--verde-medio); }
+  .gender-pct.masc { color: var(--laranja); }
+  .gender-label { font-size: .85rem; font-weight: 600; color: var(--cinza-texto); margin-top: 4px; }
+
+  /* ===== FUNNEL ===== */
+  .funnel { display: flex; align-items: center; justify-content: center; gap: 0; margin: 48px 0; flex-wrap: wrap; }
+  .funnel-step { text-align: center; padding: 28px 20px; background: var(--branco); border-radius: 20px; min-width: 170px; flex: 1; box-shadow: 0 2px 8px rgba(0,0,0,.06); transition: transform .3s ease; }
+  .funnel-step:hover { transform: translateY(-4px); }
+  .funnel-step.final { background: linear-gradient(135deg, var(--laranja), var(--laranja-escuro)); }
+  .funnel-step.final .funnel-number, .funnel-step.final .funnel-label, .funnel-step.final .funnel-detail { color: var(--branco); }
+  .funnel-number { font-size: 2.5rem; font-weight: 900; color: var(--verde-escuro); line-height: 1; margin-bottom: 8px; }
+  .funnel-label { font-size: .82rem; font-weight: 700; color: var(--verde-escuro); margin-bottom: 4px; }
+  .funnel-detail { font-size: .72rem; color: var(--cinza-texto); }
+  .funnel-arrow { font-size: 1.8rem; color: var(--verde-medio); padding: 0 6px; }
+
+  /* ===== TABLE ===== */
+  .table-wrap { overflow-x: auto; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.05); margin: 32px 0; }
+  .data-table { width: 100%; border-collapse: collapse; background: var(--branco); }
+  .data-table th { text-align: left; padding: 16px 20px; font-size: .7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--verde-medio); border-bottom: 2px solid var(--verde-claro); background: var(--branco); position: sticky; top: 0; }
+  .data-table td { padding: 14px 20px; font-size: .88rem; border-bottom: 1px solid #EDF2F7; transition: background .2s; }
+  .data-table tbody tr:hover td { background: var(--verde-claro); }
+  .data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .data-table .bold { font-weight: 700; }
+  .data-table .row-total td { background: var(--verde-escuro); color: var(--branco); font-weight: 700; }
+  .data-table .row-total:hover td { background: var(--verde-medio); }
+  .data-table .tag { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: .72rem; font-weight: 600; }
+  .tag-green { background: var(--verde-claro); color: var(--verde-escuro); }
+  .tag-orange { background: #FFF0DD; color: var(--laranja-escuro); }
+  .tag-red { background: #FFF0F0; color: var(--vermelho); }
+
+  /* ===== OBS LIST ===== */
+  .obs-list { list-style: none; margin: 24px 0; }
+  .obs-list li { padding: 18px 24px; background: var(--branco); border-radius: 14px; margin-bottom: 14px; font-size: .88rem; line-height: 1.7; border-left: 4px solid var(--laranja); box-shadow: 0 1px 3px rgba(0,0,0,.04); transition: transform .3s ease; }
+  .obs-list li:hover { transform: translateX(6px); }
+
+  /* ===== TOOLTIP ===== */
+  .tooltip-custom { position: relative; cursor: help; border-bottom: 1px dashed var(--verde-medio); }
+  .tooltip-custom:hover::after { content: attr(data-tip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: var(--cinza-escuro); color: var(--branco); padding: 8px 14px; border-radius: 8px; font-size: .75rem; white-space: nowrap; z-index: 10; }
+
+  /* ===== PROGRESS BAR MINI ===== */
+  .progress-mini { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+  .progress-track { flex: 1; height: 8px; background: #EDF2F7; border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 4px; width: 0; transition: width 1.2s cubic-bezier(.16,1,.3,1); }
+  .progress-fill.green { background: var(--verde-medio); }
+  .progress-fill.orange { background: var(--laranja); }
+  .progress-pct { font-size: .75rem; font-weight: 700; color: var(--cinza-texto); min-width: 36px; }
+
+  /* ===== KPI ROW ===== */
+  .kpi-row { display: flex; gap: 16px; margin: 20px 0; flex-wrap: wrap; }
+  .kpi { text-align: center; flex: 1; min-width: 100px; }
+  .kpi-value { font-size: 1.5rem; font-weight: 900; color: var(--verde-escuro); }
+  .kpi-label { font-size: .7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--cinza-texto); margin-top: 2px; }
+
+  /* ===== FOOTER ===== */
+  .footer { text-align: center; padding: 48px 24px; background: var(--verde-escuro); color: rgba(255,255,255,.4); font-size: .78rem; line-height: 1.8; }
+
+  /* ===== NAV DOTS ===== */
+  .nav-dots { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 10px; }
+  .nav-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,89,76,.15); cursor: pointer; transition: all .3s ease; border: none; padding: 0; position: relative; }
+  .nav-dot.active { background: var(--verde-medio); transform: scale(1.4); box-shadow: 0 0 0 4px rgba(0,122,102,.2); }
+  .nav-dot:hover { background: var(--verde-medio); }
+  .nav-dot::before { content: attr(data-label); position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: var(--cinza-escuro); color: var(--branco); padding: 4px 10px; border-radius: 6px; font-size: .65rem; font-family: 'Inter',sans-serif; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .nav-dot:hover::before { opacity: 1; }
+
+  @media(max-width:768px) {
+    .nav-dots { display: none; }
+    .funnel { flex-direction: column; }
+    .funnel-arrow { transform: rotate(90deg); }
+    .gender-section { gap: 32px; }
+  }
+
+  /* ===== COUNTER ===== */
+  .counter { display: inline-block; }
+
+  /* ===== DECORATIVE ELEMENTS ===== */
+  .deco {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .deco.visible {
+    opacity: 1;
+  }
+  .deco img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .deco-container {
+    position: relative;
+    overflow: hidden;
+  }
+  /* Parallax: elements move slower than scroll */
+  .deco[data-parallax] {
+    will-change: transform;
+  }
+  /* Spin slowly */
+  .deco.spin { animation: decoSpin 30s linear infinite; }
+  .deco.spin-reverse { animation: decoSpinR 25s linear infinite; }
+  @keyframes decoSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes decoSpinR { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+  /* Pulse */
+  .deco.pulse { animation: decoPulse 4s ease-in-out infinite; }
+  @keyframes decoPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+
+  @media(max-width:768px) {
+    .deco { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero deco-container" data-section="Capa" id="hero">
+  <div class="hero-particles" id="particles"></div>
+  <div class="deco visible spin" style="width:120px;height:120px;top:8%;left:5%;opacity:.3;" data-parallax="0.3"><img src="img/ICONES VETOR-01.png" alt=""></div>
+  <div class="deco visible spin-reverse" style="width:90px;height:90px;bottom:12%;right:8%;opacity:.25;" data-parallax="0.2"><img src="img/ICONES VETOR-11.png" alt=""></div>
+  <div class="deco visible pulse" style="width:70px;height:70px;top:20%;right:12%;opacity:.2;" data-parallax="0.4"><img src="img/ICONES VETOR-06.png" alt=""></div>
+  <div class="deco visible" style="width:100px;height:100px;bottom:20%;left:10%;opacity:.2;transform:rotate(25deg);" data-parallax="0.25"><img src="img/ICONES VETOR-03.png" alt=""></div>
+  <div class="hero-logo">Unimed Araçatuba</div>
+  <div class="hero-sub">Araçatuba</div>
+  <div class="hero-bar"></div>
+  <h1>Relatório</h1>
+  <h2>Dia Imperdível</h2>
+  <div class="hero-tags">
+    <span class="hero-tag">Campanha</span>
+    <span class="hero-tag">Tráfego Pago</span>
+    <span class="hero-tag">Comercial</span>
+  </div>
+  <div class="hero-date">25 de Agosto → 25 de Setembro de 2026 · Dados atualizados em 08/10</div>
+  <div class="scroll-cta">Role para explorar</div>
+</div>
+
+<!-- ==================== VISÃO GERAL ==================== -->
+<section data-section="Visão Geral" class="deco-container" style="overflow:hidden;">
+  <div class="deco spin" style="width:140px;height:140px;top:-30px;right:-40px;opacity:.28;" data-parallax="0.15"><img src="img/ICONES VETOR-08.png" alt=""></div>
+  <div class="deco pulse" style="width:80px;height:80px;bottom:60px;left:-20px;opacity:.3;" data-parallax="0.2"><img src="img/ICONES VETOR-09.png" alt=""></div>
+  <div class="section-title">Visão Geral</div>
+  <div class="section-heading">O que a campanha gerou</div>
+  <div class="section-subtitle">Números consolidados dos funis Dia Imperdível e Segunda Abordagem, todas as origens.</div>
+
+  <div class="cards-grid">
+    <div class="card anim" data-delay="0">
+      <div class="card-accent green"></div>
+      <div class="card-label">Total de Leads</div>
+      <div class="card-number"><span class="counter" data-target="1239">0</span></div>
+      <div class="card-detail">551 no Dia Imperdível · 688 na Segunda Abordagem</div>
+    </div>
+    <div class="card card-big anim" data-delay="100">
+      <div class="card-label">Contratos Fechados</div>
+      <div class="card-number"><span class="counter" data-target="104">0</span></div>
+      <div class="card-detail">364 vidas vendidas no total</div>
+    </div>
+    <div class="card anim" data-delay="200">
+      <div class="card-accent orange"></div>
+      <div class="card-label orange">Mensalidade Gerada</div>
+      <div class="card-number orange">R$ <span class="counter" data-target="99683">0</span></div>
+      <div class="card-detail">R$ 1.196.199 projetados em 12 meses</div>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card anim" data-delay="300">
+      <div class="card-accent yellow"></div>
+      <div class="card-label">Em Andamento</div>
+      <div class="card-number"><span class="counter" data-target="778">0</span></div>
+      <div class="card-detail">163 no Dia Imperdível · 615 na Segunda Abordagem</div>
+    </div>
+    <div class="card anim" data-delay="400">
+      <div class="card-label">Perdidos</div>
+      <div class="card-number"><span class="counter" data-target="357">0</span></div>
+      <div class="card-detail">negociações encerradas sem fechamento</div>
+    </div>
+    <div class="card anim" data-delay="500">
+      <div class="card-accent green"></div>
+      <div class="card-label">Investimento em Mídia</div>
+      <div class="card-number">R$ <span class="counter" data-target="6095">0</span></div>
+      <div class="card-detail">Meta R$ 3.603 · Google R$ 2.492</div>
+    </div>
+  </div>
+
+  <div class="callout green anim">
+    <strong>No período da campanha (25/08–25/09):</strong> 56 contratos, 155 vidas, R$ 47.025/mês.<br>
+    <strong>Pós-campanha (26/09–08/10):</strong> +12 contratos, +58 vidas, +R$ 12.536/mês. A campanha continua convertendo.
+  </div>
+</section>
+
+<!-- ==================== SEMANA A SEMANA ==================== -->
+<div class="section-full section-white deco-container" data-section="Semanas" style="overflow:hidden;">
+  <div class="deco spin-reverse" style="width:110px;height:110px;top:40px;right:30px;opacity:.25;" data-parallax="0.2"><img src="img/ICONES VETOR-02.png" alt=""></div>
+  <div class="section-inner">
+    <div class="section-title">Semana a Semana</div>
+    <div class="section-heading">Picos de entrada e fechamento</div>
+    <div class="section-subtitle">Volume de leads, ganhos e perdas por semana ao longo da campanha.</div>
+
+    <div class="chart-container anim" style="max-width:900px;height:400px;">
+      <canvas id="chartSemanas"></canvas>
+    </div>
+
+    <div class="table-wrap anim">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Semana</th>
+            <th class="num">Iniciados</th>
+            <th class="num">Ganhos</th>
+            <th class="num">Perdidos</th>
+            <th class="num">Taxa de Ganho</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>25–31/08</td><td class="num bold">272</td><td class="num">7</td><td class="num">29</td><td class="num">2,6%</td></tr>
+          <tr><td>01–07/09</td><td class="num bold">220</td><td class="num">8</td><td class="num">57</td><td class="num">3,6%</td></tr>
+          <tr><td>08–14/09</td><td class="num bold">224</td><td class="num">16</td><td class="num">21</td><td class="num">7,1%</td></tr>
+          <tr><td>15–21/09</td><td class="num bold">197</td><td class="num">16</td><td class="num">55</td><td class="num">8,1%</td></tr>
+          <tr><td>22–25/09 <span class="tag tag-orange">4 dias</span></td><td class="num bold">91</td><td class="num">9</td><td class="num">74</td><td class="num">9,9%</td></tr>
+          <tr style="background:#FFF9EC;"><td>26/09–08/10 <span class="tag tag-green">pós-campanha</span></td><td class="num bold">24</td><td class="num">12</td><td class="num">37</td><td class="num">50,0%</td></tr>
+          <tr class="row-total"><td>Total</td><td class="num">1.028</td><td class="num">68</td><td class="num">273</td><td class="num">6,6%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout yellow anim">
+      <strong>A taxa de ganho subiu a cada semana.</strong> Leads que entraram primeiro tiveram mais tempo para amadurecer. No pós-campanha, 50% dos fechamentos vieram de leads que já estavam no funil. O ciclo médio de venda é de 22 dias.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MARKETING vs COMERCIAL ==================== -->
+<div class="section-full section-dark deco-container" data-section="Mkt vs Comercial" style="overflow:hidden;">
+  <div class="deco spin" style="width:130px;height:130px;top:60px;left:-30px;opacity:.3;" data-parallax="0.15"><img src="img/ICONES VETOR-05.png" alt=""></div>
+  <div class="deco pulse" style="width:90px;height:90px;bottom:80px;right:20px;opacity:.28;" data-parallax="0.25"><img src="img/ICONES VETOR-04.png" alt=""></div>
+  <div class="section-inner">
+    <div class="section-title">Resultado por Origem</div>
+    <div class="section-heading">Marketing vs Comercial</div>
+    <div class="section-subtitle">O tráfego pago trouxe leads pelo simulador. O time comercial trabalhou indicações, prospecção e telefone.</div>
+
+    <div class="split">
+      <div class="split-box anim from-left" style="border-top:4px solid var(--verde-medio);">
+        <div class="card-label">Marketing · Tráfego Pago</div>
+        <div style="font-size:3rem;font-weight:900;color:var(--verde-escuro);margin:16px 0 4px;">19 <span style="font-size:1rem;font-weight:400;color:var(--cinza-texto)">contratos</span></div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="kpi-value">44</div><div class="kpi-label">Vidas</div></div>
+          <div class="kpi"><div class="kpi-value" style="color:var(--verde-medio);">R$ 10.447</div><div class="kpi-label">Mensal</div></div>
+          <div class="kpi"><div class="kpi-value">20,6x</div><div class="kpi-label">ROI 12m</div></div>
+        </div>
+        <div class="progress-mini" style="margin-top:20px;">
+          <span style="font-size:.75rem;font-weight:600;">Participação</span>
+          <div class="progress-track"><div class="progress-fill green" data-width="18%"></div></div>
+          <span class="progress-pct">18%</span>
+        </div>
+        <p style="margin-top:12px;font-size:.82rem;color:var(--cinza-texto);">~516 leads · R$ 6.095 investidos · CPL R$ 11,81</p>
+      </div>
+      <div class="split-box anim from-right" style="border-top:4px solid var(--laranja);">
+        <div class="card-label orange">Comercial · Outras Origens</div>
+        <div style="font-size:3rem;font-weight:900;color:var(--verde-escuro);margin:16px 0 4px;">83 <span style="font-size:1rem;font-weight:400;color:var(--cinza-texto)">contratos</span></div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="kpi-value">320</div><div class="kpi-label">Vidas</div></div>
+          <div class="kpi"><div class="kpi-value" style="color:var(--laranja);">R$ 89.236</div><div class="kpi-label">Mensal</div></div>
+          <div class="kpi"><div class="kpi-value">—</div><div class="kpi-label">ROI</div></div>
+        </div>
+        <div class="progress-mini" style="margin-top:20px;">
+          <span style="font-size:.75rem;font-weight:600;">Participação</span>
+          <div class="progress-track"><div class="progress-fill orange" data-width="82%"></div></div>
+          <span class="progress-pct">82%</span>
+        </div>
+        <p style="margin-top:12px;font-size:.82rem;color:var(--cinza-texto);">Indicação, telefone, presencial, prospecção e WhatsApp</p>
+      </div>
+    </div>
+
+    <div class="chart-container anim" style="max-width:500px;height:320px;margin-top:40px;">
+      <canvas id="chartPizza"></canvas>
+    </div>
+
+    <div class="callout dark anim">
+      <strong>Duplicatas identificadas:</strong> ART FINAL (4 vidas, R$ 1.177/mês, vendedor Murilo) e Phitofarma (15 vidas, sem valor, vendedor Gabriel). Ambas simularam no site e o vendedor fechou em negócio manual. São 19 vidas que passaram pelo site mas estão contadas como comercial.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PLATAFORMAS ==================== -->
+<section data-section="Plataformas">
+  <div class="section-title">Investimento por Plataforma</div>
+  <div class="section-heading">Meta vs Google</div>
+  <div class="section-subtitle">Distribuição da verba, volume de leads e resultado de cada canal.</div>
+
+  <div class="split">
+    <div class="split-box anim from-left" style="border-top:4px solid var(--verde-medio);">
+      <h3>Meta</h3>
+      <p style="color:var(--cinza-texto);margin-bottom:20px;">Instagram, Facebook, Audience Network e Threads</p>
+      <div class="card-number" style="margin-bottom:4px;">R$ 3.603</div>
+      <div class="card-detail" style="margin-bottom:20px;">59% da verba</div>
+      <div class="kpi-row">
+        <div class="kpi"><div class="kpi-value">591</div><div class="kpi-label">Leads</div></div>
+        <div class="kpi"><div class="kpi-value">R$ 6,10</div><div class="kpi-label">CPL</div></div>
+        <div class="kpi"><div class="kpi-value" style="color:var(--verde-medio);">18</div><div class="kpi-label">Vendas</div></div>
+      </div>
+    </div>
+    <div class="split-box anim from-right" style="border-top:4px solid var(--laranja);">
+      <h3 class="orange">Google</h3>
+      <p style="color:var(--cinza-texto);margin-bottom:20px;">Rede de Pesquisa</p>
+      <div class="card-number orange" style="margin-bottom:4px;">R$ 2.492</div>
+      <div class="card-detail" style="margin-bottom:20px;">41% da verba</div>
+      <div class="kpi-row">
+        <div class="kpi"><div class="kpi-value">11</div><div class="kpi-label">Leads</div></div>
+        <div class="kpi"><div class="kpi-value">R$ 226</div><div class="kpi-label">CPL</div></div>
+        <div class="kpi"><div class="kpi-value" style="color:var(--cinza-texto);">—</div><div class="kpi-label">Vendas</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout yellow anim">
+    O Google consumiu 41% da verba e trouxe 1,6% dos leads. <strong>A Meta converte volume, o Google protege a marca e gera demanda.</strong>
+  </div>
+</section>
+
+<!-- ==================== PERFIL DOS LEADS ==================== -->
+<div class="section-full section-white deco-container" data-section="Perfil" style="overflow:hidden;">
+  <div class="deco spin-reverse" style="width:100px;height:100px;bottom:40px;left:20px;opacity:.25;" data-parallax="0.2"><img src="img/ICONES VETOR-10.png" alt=""></div>
+  <div class="deco" style="width:80px;height:80px;top:30px;right:-10px;opacity:.22;transform:rotate(-15deg);" data-parallax="0.3"><img src="img/ICONES VETOR-01.png" alt=""></div>
+  <div class="section-inner">
+    <div class="section-title">Perfil dos Leads</div>
+    <div class="section-heading">Quem respondeu à campanha</div>
+    <div class="section-subtitle">Distribuição por gênero e faixa etária dos leads gerados pela campanha.</div>
+
+    <!-- BONEQUINHOS -->
+    <div class="gender-section anim from-scale">
+      <div class="gender-figure">
+        <div class="gender-icon">
+          <svg width="100" height="140" viewBox="0 0 100 140">
+            <!-- Mulher -->
+            <circle cx="50" cy="24" r="18" fill="var(--verde-medio)" opacity="0.15"/>
+            <circle cx="50" cy="24" r="14" fill="var(--verde-medio)"/>
+            <circle cx="45" cy="22" r="1.5" fill="white"/>
+            <circle cx="55" cy="22" r="1.5" fill="white"/>
+            <path d="M45 28 Q50 32 55 28" stroke="white" stroke-width="1.5" fill="none"/>
+            <!-- Corpo (vestido) -->
+            <path d="M35 44 L30 110 Q50 118 70 110 L65 44 Q50 50 35 44Z" fill="var(--verde-medio)"/>
+            <!-- Braços -->
+            <path d="M35 48 L20 80" stroke="var(--verde-medio)" stroke-width="6" stroke-linecap="round"/>
+            <path d="M65 48 L80 80" stroke="var(--verde-medio)" stroke-width="6" stroke-linecap="round"/>
+            <!-- Pernas -->
+            <line x1="42" y1="110" x2="40" y2="136" stroke="var(--verde-medio)" stroke-width="5" stroke-linecap="round"/>
+            <line x1="58" y1="110" x2="60" y2="136" stroke="var(--verde-medio)" stroke-width="5" stroke-linecap="round"/>
+            <!-- Cabelo -->
+            <path d="M32 20 Q30 8 50 6 Q70 8 68 20" stroke="var(--verde-escuro)" stroke-width="4" fill="none"/>
+            <path d="M32 20 L28 38" stroke="var(--verde-escuro)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M68 20 L72 38" stroke="var(--verde-escuro)" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="gender-pct fem"><span class="counter" data-target="62" data-suffix=",6%">0</span></div>
+        <div class="gender-label">Feminino</div>
+      </div>
+
+      <div style="font-size:2rem;color:#CBD5E0;font-weight:300;">vs</div>
+
+      <div class="gender-figure">
+        <div class="gender-icon">
+          <svg width="100" height="140" viewBox="0 0 100 140">
+            <!-- Homem -->
+            <circle cx="50" cy="24" r="18" fill="var(--laranja)" opacity="0.15"/>
+            <circle cx="50" cy="24" r="14" fill="var(--laranja)"/>
+            <circle cx="45" cy="22" r="1.5" fill="white"/>
+            <circle cx="55" cy="22" r="1.5" fill="white"/>
+            <path d="M45 28 Q50 32 55 28" stroke="white" stroke-width="1.5" fill="none"/>
+            <!-- Corpo (camiseta) -->
+            <rect x="34" y="44" width="32" height="40" rx="4" fill="var(--laranja)"/>
+            <!-- Braços -->
+            <path d="M34 48 L18 78" stroke="var(--laranja)" stroke-width="6" stroke-linecap="round"/>
+            <path d="M66 48 L82 78" stroke="var(--laranja)" stroke-width="6" stroke-linecap="round"/>
+            <!-- Calça -->
+            <rect x="36" y="82" width="12" height="36" rx="4" fill="var(--laranja-escuro)"/>
+            <rect x="52" y="82" width="12" height="36" rx="4" fill="var(--laranja-escuro)"/>
+            <!-- Cabelo curto -->
+            <path d="M34 18 Q34 6 50 5 Q66 6 66 18" fill="var(--cinza-escuro)"/>
+          </svg>
+        </div>
+        <div class="gender-pct masc"><span class="counter" data-target="37" data-suffix=",2%">0</span></div>
+        <div class="gender-label">Masculino</div>
+      </div>
+    </div>
+
+    <!-- GRÁFICO FAIXA ETÁRIA -->
+    <div class="chart-container anim" style="max-width:800px;height:380px;">
+      <canvas id="chartIdade"></canvas>
+    </div>
+
+    <div class="callout green anim">
+      <strong>Mulheres de 25 a 44 anos</strong> concentram a conversão: sozinhas, representam 4 em cada 10 leads gerados. O público feminino lidera em todas as faixas até os 54 anos, refletindo seu papel de decisão sobre a saúde da família.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FUNIL ==================== -->
+<div class="section-full section-dark deco-container" data-section="Funil" style="overflow:hidden;">
+  <div class="deco spin" style="width:120px;height:120px;top:30px;right:-20px;opacity:.3;" data-parallax="0.2"><img src="img/ICONES VETOR-07.png" alt=""></div>
+  <div class="deco pulse" style="width:70px;height:70px;bottom:100px;left:30px;opacity:.28;" data-parallax="0.15"><img src="img/ICONES VETOR-11.png" alt=""></div>
+  <div class="section-inner">
+    <div class="section-title">Do Clique à Venda</div>
+    <div class="section-heading">O caminho do lead</div>
+
+    <div class="funnel">
+      <div class="funnel-step anim" data-delay="0">
+        <div class="funnel-number"><span class="counter" data-target="1239">0</span></div>
+        <div class="funnel-label">Leads nos funis</div>
+        <div class="funnel-detail">ambos os funis da campanha</div>
+      </div>
+      <div class="funnel-arrow anim" data-delay="150">→</div>
+      <div class="funnel-step anim" data-delay="200">
+        <div class="funnel-number"><span class="counter" data-target="551">0</span></div>
+        <div class="funnel-label">Funil Dia Imperdível</div>
+        <div class="funnel-detail">leads qualificados para venda</div>
+      </div>
+      <div class="funnel-arrow anim" data-delay="350">→</div>
+      <div class="funnel-step anim" data-delay="400">
+        <div class="funnel-number"><span class="counter" data-target="104">0</span></div>
+        <div class="funnel-label">Contratos fechados</div>
+        <div class="funnel-detail">todas as origens</div>
+      </div>
+      <div class="funnel-arrow anim" data-delay="550">→</div>
+      <div class="funnel-step final anim" data-delay="600">
+        <div class="funnel-number"><span class="counter" data-target="364">0</span></div>
+        <div class="funnel-label">Vidas vendidas</div>
+        <div class="funnel-detail">R$ 99.683/mês</div>
+      </div>
+    </div>
+
+    <!-- ETAPAS DOS EM ANDAMENTO -->
+    <div style="margin-top:56px;">
+      <div class="section-title">Em Andamento</div>
+      <h3 style="color:var(--branco);font-size:1.3rem;margin-bottom:24px;">163 negociações ativas no Funil Dia Imperdível</h3>
+      <div class="chart-container anim" style="max-width:700px;height:320px;">
+        <canvas id="chartEtapas"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== POR QUE PERDEMOS ==================== -->
+<section data-section="Perdas">
+  <div class="section-title">Por que Perdemos</div>
+  <div class="section-heading">Motivos de perda nos negócios do site</div>
+  <div class="section-subtitle">80 perdas registradas no período. O motivo é registrado pelo consultor ao encerrar o negócio.</div>
+
+  <div class="split">
+    <div class="chart-container anim from-left" style="height:340px;">
+      <canvas id="chartPerdas"></canvas>
+    </div>
+    <div class="anim from-right" style="display:flex;flex-direction:column;gap:16px;">
+      <div class="split-box" style="flex:1;">
+        <h3>Metade é falta de retorno</h3>
+        <p>O consultor tentou e a pessoa não respondeu. É volume de contato, não qualidade de lead.</p>
+      </div>
+      <div class="split-box" style="flex:1;border-left:4px solid var(--laranja);">
+        <h3 class="orange">Elegibilidade é o alvo da mídia</h3>
+        <p>17 das 18 perdas por elegibilidade vieram do site. Segmentação e texto de anúncio conseguem reduzir.</p>
+      </div>
+      <div class="split-box" style="flex:1;">
+        <h3>30 das 80 perdas são de perfil</h3>
+        <p>Somando elegibilidade, dados incorretos, área de atendimento e regras. É o que segmentação e copy resolvem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CURVA CPL ==================== -->
+<div class="section-full section-white deco-container" data-section="Curva CPL" style="overflow:hidden;">
+  <div class="deco spin-reverse" style="width:100px;height:100px;top:50px;left:-20px;opacity:.22;" data-parallax="0.2"><img src="img/ICONES VETOR-06.png" alt=""></div>
+  <div class="section-inner">
+    <div class="section-title">A Curva do Custo por Lead</div>
+    <div class="section-heading">Saturação semana a semana</div>
+    <div class="section-subtitle">O CPL subiu 90% enquanto o CPM subiu apenas 29%. A maior parte vem da perda de intenção do público.</div>
+
+    <div class="chart-container anim" style="max-width:850px;height:380px;">
+      <canvas id="chartCPL"></canvas>
+    </div>
+
+    <div class="table-wrap anim">
+      <table class="data-table">
+        <thead><tr><th>Semana</th><th class="num">Leads</th><th class="num">CPL</th><th class="num">Frequência</th><th class="num">CPM</th></tr></thead>
+        <tbody>
+          <tr><td>25–31/08</td><td class="num bold">134</td><td class="num" style="color:var(--verde-medio);font-weight:700;">R$ 5,25</td><td class="num">3,08</td><td class="num">R$ 10,29</td></tr>
+          <tr><td>01–07/09</td><td class="num bold">111</td><td class="num">R$ 6,40</td><td class="num">3,04</td><td class="num">R$ 10,34</td></tr>
+          <tr><td>08–14/09</td><td class="num bold">113</td><td class="num">R$ 7,27</td><td class="num">2,93</td><td class="num">R$ 10,68</td></tr>
+          <tr><td>15–21/09</td><td class="num bold">100</td><td class="num">R$ 8,51</td><td class="num">2,40</td><td class="num">R$ 11,98</td></tr>
+          <tr style="background:#FFF9EC;"><td>22–25/09 <span class="tag tag-orange">4 dias</span></td><td class="num bold">38</td><td class="num" style="color:var(--laranja);font-weight:700;">R$ 10,00</td><td class="num">1,63</td><td class="num">R$ 13,26</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout yellow anim">
+      <strong>Araçatuba tem um estoque finito</strong> de empresas procurando plano. Campanha concentrada consome a parte quente em poucas semanas; operação contínua gera demanda nova em vez de só colher a existente.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== OBSERVAÇÕES ==================== -->
+<section data-section="Observações">
+  <div class="section-title">Observações Importantes</div>
+  <div class="section-heading">Pontos de atenção</div>
+
+  <ul class="obs-list">
+    <li class="anim"><strong>4 contratos sem valor preenchido:</strong> 3 do tráfego pago (6 vidas) e a Phitofarma (15 vidas). A mensalidade real da campanha é maior do que o registrado no Agendor.</li>
+    <li class="anim"><strong>Segunda Abordagem sem fechamento:</strong> 615 negócios em andamento neste funil. São cadastros incompletos e já clientes que simularam. Nenhum foi ganho até agora. Oportunidade de ação comercial.</li>
+    <li class="anim"><strong>Duplicatas no funil:</strong> ART FINAL (Murilo, 4 vidas) e Phitofarma (Gabriel, 15 vidas) simularam no site, mas o vendedor fechou em negócio manual. O do site ficou aberto. Pode haver mais casos não identificáveis.</li>
+    <li class="anim"><strong>Ciclo de venda de 22 dias:</strong> campanha de 32 dias entrega resultado depois que a mídia já parou, subnotificando o próprio desempenho.</li>
+  </ul>
+</section>
+
+<!-- ==================== RECOMENDAÇÕES ==================== -->
+<div class="section-full section-dark deco-container" data-section="Próximos Passos" style="overflow:hidden;">
+  <div class="deco spin" style="width:150px;height:150px;bottom:-30px;right:-30px;opacity:.28;" data-parallax="0.15"><img src="img/ICONES VETOR-03.png" alt=""></div>
+  <div class="deco pulse" style="width:80px;height:80px;top:40px;left:20px;opacity:.3;" data-parallax="0.25"><img src="img/ICONES VETOR-09.png" alt=""></div>
+  <div class="section-inner">
+    <div class="section-title">Próximos Passos</div>
+    <div class="section-heading">Recomendação: modelo contínuo</div>
+    <div class="section-subtitle">Até aqui o trabalho aconteceu em picos de campanha. Os dados sugerem três camadas convivendo o ano inteiro.</div>
+
+    <div class="split split-3">
+      <div class="card anim" data-delay="0" style="border-top:4px solid var(--verde-medio);">
+        <div class="card-label">Camada 1</div>
+        <h3 style="font-size:1.2rem;font-weight:800;color:var(--verde-escuro);margin:12px 0;">Sempre ativa</h3>
+        <div class="card-detail">
+          <p style="margin-bottom:8px;">Verba baixa e constante</p>
+          <p style="margin-bottom:8px;">Brand Defense no Google: só a marca Unimed Araçatuba, protegendo contra corretora</p>
+          <p>Remarketing no Meta para os contatos parados na Segunda Abordagem</p>
+        </div>
+      </div>
+      <div class="card anim" data-delay="150" style="border-top:4px solid var(--amarelo);">
+        <div class="card-label">Camada 2</div>
+        <h3 style="font-size:1.2rem;font-weight:800;color:var(--verde-escuro);margin:12px 0;">Geração de demanda</h3>
+        <div class="card-detail">
+          <p style="margin-bottom:8px;">Rodando o ano todo</p>
+          <p style="margin-bottom:8px;">Conteúdo que esclarece quem pode contratar, atacando a perda por elegibilidade na origem</p>
+          <p>Topo de funil para empresa que ainda não oferece plano</p>
+        </div>
+      </div>
+      <div class="card anim" data-delay="300" style="border-top:4px solid var(--laranja);">
+        <div class="card-label orange">Camada 3</div>
+        <h3 style="font-size:1.2rem;font-weight:800;color:var(--verde-escuro);margin:12px 0;">Picos de campanha</h3>
+        <div class="card-detail">
+          <p style="margin-bottom:8px;">Datas e ofertas pontuais</p>
+          <p style="margin-bottom:8px;">Feirão, Dia Imperdível e datas comerciais</p>
+          <p>A diferença é partir de uma base aquecida pelas camadas 1 e 2</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:40px;">
+      <div class="split-box dark anim from-left">
+        <h3 class="yellow">Enviar a venda de volta para a Meta</h3>
+        <p>Hoje o algoritmo otimiza por lead. Alimentando o contrato fechado do Agendor por API, ele passa a procurar quem compra, não quem simula.</p>
+      </div>
+      <div class="split-box dark anim from-right">
+        <h3 class="yellow">Um padrão único de UTM</h3>
+        <p>135 leads chegaram sem origem identificada. Com um padrão único, o próximo relatório fecha essa leitura e liga venda a criativo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="footer">
+  <p style="font-size:.9rem;color:rgba(255,255,255,.6);margin-bottom:4px;">Relatório Dia Imperdível · Unimed Araçatuba</p>
+  <p>Dados do Agendor em 08/10/2026 · Somente consulta, nenhuma alteração foi feita no CRM</p>
+</div>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+// ===== PARTICLES =====
+const particlesEl = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'hero-particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.animationDuration = (6 + Math.random() * 8) + 's';
+  p.style.animationDelay = Math.random() * 6 + 's';
+  p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+  particlesEl.appendChild(p);
+}
+
+// ===== INTERSECTION OBSERVER =====
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const delay = parseInt(el.dataset.delay || 0);
+      setTimeout(() => {
+        el.classList.add('visible');
+        el.querySelectorAll('.counter').forEach(animateCounter);
+        el.querySelectorAll('.progress-fill').forEach(bar => { bar.style.width = bar.dataset.width; });
+      }, delay);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.anim').forEach(el => obs.observe(el));
+
+// ===== COUNTERS =====
+function animateCounter(el) {
+  if (el.dataset.animated) return;
+  el.dataset.animated = '1';
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const dur = 1600;
+  const start = performance.now();
+  (function update(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const e = 1 - Math.pow(1 - p, 4);
+    const cur = Math.round(target * e);
+    el.textContent = (target > 999 ? cur.toLocaleString('pt-BR') : cur) + (p >= 1 ? suffix : '');
+    if (p < 1) requestAnimationFrame(update);
+  })(start);
+}
+
+// ===== NAV DOTS =====
+const sections = document.querySelectorAll('[data-section]');
+const navDots = document.getElementById('navDots');
+sections.forEach((s, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'nav-dot';
+  dot.dataset.label = s.dataset.section;
+  dot.onclick = () => s.scrollIntoView({ behavior: 'smooth' });
+  navDots.appendChild(dot);
+});
+const dotObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(sections).indexOf(entry.target);
+      document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.25 });
+sections.forEach(s => dotObs.observe(s));
+
+// ===== DECO ELEMENTS OBSERVER =====
+const decoObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.deco:not(.visible)').forEach(el => decoObs.observe(el));
+
+// ===== PARALLAX ON SCROLL =====
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      document.querySelectorAll('.deco[data-parallax]').forEach(el => {
+        const speed = parseFloat(el.dataset.parallax);
+        const rect = el.closest('.deco-container').getBoundingClientRect();
+        const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * speed;
+        const base = el.classList.contains('spin') || el.classList.contains('spin-reverse') ? '' : `rotate(${el.style.transform.match(/rotate\(([^)]+)\)/)?.[1] || '0deg'})`;
+        el.style.transform = `translateY(${-offset}px) ${base}`;
+      });
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+// ===== CHARTS =====
+Chart.defaults.font.family = "'Unimed Sans', 'Inter', sans-serif";
+Chart.register(ChartDataLabels);
+
+// Helper: delayed bar animation (bars grow one by one)
+function delayedBarAnimation(totalBars) {
+  return {
+    duration: 1800,
+    easing: 'easeOutQuart',
+    delay: function(ctx) {
+      if (ctx.type === 'data') {
+        return ctx.dataIndex * 150 + ctx.datasetIndex * 80;
+      }
+      return 0;
+    }
+  };
+}
+
+// Helper: create chart on scroll
+function chartOnScroll(canvas, config) {
+  const io = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      io.disconnect();
+      new Chart(canvas, config);
+    }
+  }, { threshold: 0.25 });
+  io.observe(canvas);
+}
+
+// -- Semanas --
+chartOnScroll(document.getElementById('chartSemanas'), {
+  type: 'bar',
+  data: {
+    labels: ['25-31/08', '01-07/09', '08-14/09', '15-21/09', '22-25/09', '26/09-08/10'],
+    datasets: [
+      { label: 'Iniciados', data: [272,220,224,197,91,24], backgroundColor: '#00594C', borderRadius: 6, borderSkipped: false },
+      { label: 'Ganhos', data: [7,8,16,16,9,12], backgroundColor: '#007A66', borderRadius: 6, borderSkipped: false },
+      { label: 'Perdidos', data: [29,57,21,55,74,37], backgroundColor: '#F28C28', borderRadius: 6, borderSkipped: false }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    animation: delayedBarAnimation(6),
+    plugins: { datalabels: { display: false }, legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
+      tooltip: { backgroundColor: '#00594C', titleFont: { weight: 'bold' }, bodySpacing: 6, padding: 14, cornerRadius: 10 }
+    },
+    scales: { y: { beginAtZero: true, grid: { color: '#EDF2F7' } }, x: { grid: { display: false } } }
+  }
+});
+
+// -- Pizza Mkt vs Comercial --
+chartOnScroll(document.getElementById('chartPizza'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Comercial (83)', 'Marketing (19)', 'Duplicatas (2)'],
+    datasets: [{ data: [83, 19, 2], backgroundColor: ['#F28C28', '#007A66', '#C8E64C'], borderWidth: 3, borderColor: '#00594C', hoverOffset: 16 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: '58%',
+    animation: { animateRotate: true, duration: 2000, easing: 'easeOutQuart' },
+    plugins: {
+      legend: { position: 'bottom', labels: { color: '#fff', usePointStyle: true, padding: 16 } },
+      datalabels: { color: '#fff', font: { weight: 'bold', size: 15 }, formatter: (v) => v },
+      tooltip: { backgroundColor: '#00594C', padding: 14, cornerRadius: 10 }
+    }
+  }
+});
+
+// -- Faixa Etária --
+chartOnScroll(document.getElementById('chartIdade'), {
+  type: 'bar',
+  data: {
+    labels: ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'],
+    datasets: [
+      { label: 'Feminino', data: [3.6, 20.2, 22.8, 13.0, 4.8, 1.8], backgroundColor: '#007A66', borderRadius: 6, borderSkipped: false },
+      { label: 'Masculino', data: [1.5, 9.5, 10.1, 8.2, 3.3, 1.2], backgroundColor: '#F28C28', borderRadius: 6, borderSkipped: false }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    animation: delayedBarAnimation(6),
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, beginAtZero: true, grid: { color: '#EDF2F7' }, ticks: { callback: v => v + '%' } }
+    },
+    plugins: {
+      datalabels: {
+        display: function(ctx) { return ctx.datasetIndex === 1; },
+        anchor: 'end', align: 'end',
+        font: { weight: 'bold', size: 13 },
+        color: '#2D3748',
+        formatter: (v, ctx) => {
+          const totals = [5.1, 29.7, 32.9, 21.2, 8.1, 3.0];
+          return totals[ctx.dataIndex] + '%';
+        }
+      },
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
+      tooltip: { backgroundColor: '#00594C', padding: 14, cornerRadius: 10 }
+    }
+  }
+});
+
+// -- Etapas em andamento --
+chartOnScroll(document.getElementById('chartEtapas'), {
+  type: 'bar',
+  data: {
+    labels: ['Follow Up 1', 'Tent. Contato', 'Cont. Realizado', 'Apres. Proposta', 'Follow Up 2', 'Fechamento', 'Follow Up 3', 'Leads'],
+    datasets: [{
+      data: [43, 41, 26, 21, 15, 10, 4, 3],
+      backgroundColor: ['#A8DBC5','#82CCAE','#A8DBC5','#82CCAE','#A8DBC5','#F28C28','#82CCAE','#A8DBC5'],
+      borderRadius: 8, borderSkipped: false
+    }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    animation: { duration: 2000, easing: 'easeOutQuart',
+      delay: function(ctx) { return ctx.type === 'data' ? ctx.dataIndex * 200 : 0; }
+    },
+    plugins: {
+      legend: { display: false },
+      datalabels: { anchor: 'end', align: 'end', color: '#fff', font: { weight: 'bold', size: 13 } },
+      tooltip: { backgroundColor: '#00594C', padding: 14, cornerRadius: 10 }
+    },
+    scales: { x: { display: false }, y: { grid: { display: false }, ticks: { color: '#fff', font: { size: 12, weight: '500' } } } }
+  }
+});
+
+// -- Motivos de perda (donut) --
+chartOnScroll(document.getElementById('chartPerdas'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Falta de retorno (40)', 'Elegibilidade (17)', 'Outros perfil (13)', 'Negociação/preço (8)', 'Falta movimentação (2)'],
+    datasets: [{
+      data: [40, 17, 13, 8, 2],
+      backgroundColor: ['#00594C', '#F28C28', '#007A66', '#A8DBC5', '#C8E64C'],
+      borderWidth: 3, borderColor: '#fff', hoverOffset: 14
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: '50%',
+    animation: { animateRotate: true, duration: 2000, easing: 'easeOutQuart' },
+    plugins: {
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 12, font: { size: 11 } } },
+      datalabels: { color: '#fff', font: { weight: 'bold', size: 14 }, formatter: (v) => v },
+      tooltip: { backgroundColor: '#00594C', padding: 14, cornerRadius: 10 }
+    }
+  }
+});
+
+// -- Curva CPL (line draws progressively) --
+chartOnScroll(document.getElementById('chartCPL'), {
+  type: 'line',
+  data: {
+    labels: ['25-31/08', '01-07/09', '08-14/09', '15-21/09', '22-25/09'],
+    datasets: [
+      {
+        label: 'CPL (R$)', data: [5.25, 6.40, 7.27, 8.51, 10.00],
+        borderColor: '#F28C28', backgroundColor: 'rgba(242,140,40,0.1)',
+        borderWidth: 3, pointRadius: 8, pointHoverRadius: 14,
+        pointBackgroundColor: ['#007A66','#007A66','#007A66','#007A66','#F28C28'],
+        pointBorderColor: '#fff', pointBorderWidth: 3,
+        fill: true, tension: 0.35
+      },
+      {
+        label: 'Leads', data: [134, 111, 113, 100, 38],
+        borderColor: '#007A66', backgroundColor: 'rgba(0,122,102,0.08)',
+        borderWidth: 2, borderDash: [6,4],
+        pointRadius: 6, pointHoverRadius: 10, pointBackgroundColor: '#007A66', pointBorderColor: '#fff', pointBorderWidth: 2,
+        fill: true, tension: 0.35, yAxisID: 'y2'
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    animation: {
+      x: { duration: 2000, easing: 'easeOutQuart' },
+      y: { duration: 1500, easing: 'easeOutQuart', delay: function(ctx) { return ctx.dataIndex * 300; } }
+    },
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      datalabels: {
+        display: function(ctx) { return ctx.datasetIndex === 0; },
+        anchor: 'end', align: 'top', color: '#F28C28',
+        font: { weight: 'bold', size: 13 },
+        formatter: v => 'R$ ' + v.toFixed(2).replace('.',',')
+      },
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
+      tooltip: { backgroundColor: '#00594C', padding: 14, cornerRadius: 10 }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: '#EDF2F7' }, title: { display: true, text: 'CPL (R$)', color: '#F28C28' }, ticks: { callback: v => 'R$ ' + v } },
+      y2: { position: 'right', beginAtZero: true, grid: { display: false }, title: { display: true, text: 'Leads', color: '#007A66' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
