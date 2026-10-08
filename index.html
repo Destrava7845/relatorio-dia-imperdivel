@@ -397,9 +397,6 @@
       <canvas id="chartPizza"></canvas>
     </div>
 
-    <div class="callout dark anim">
-      <strong>Duplicatas identificadas:</strong> ART FINAL (4 vidas, R$ 1.177/mês, vendedor Murilo) e Phitofarma (15 vidas, sem valor, vendedor Gabriel). Ambas simularam no site e o vendedor fechou em negócio manual. São 19 vidas que passaram pelo site mas estão contadas como comercial.
-    </div>
   </div>
 </div>
 
@@ -465,64 +462,37 @@
     <div class="section-heading">Quem respondeu à campanha</div>
     <div class="section-subtitle">Distribuição por gênero e faixa etária das negociações geradas pela campanha.</div>
 
-    <!-- SILHOUETTES SIDE BY SIDE -->
-    <div class="gender-section anim from-scale">
-      <div class="gender-group">
-        <div class="gender-group-title">Negociações</div>
-        <div class="gender-figures">
-          <div class="gender-figure">
-            <div class="gender-icon">
-              <svg width="80" height="130" viewBox="0 0 80 130">
-                <!-- Woman silhouette -->
-                <circle cx="40" cy="18" r="14" fill="var(--verde-medio)"/>
-                <!-- Hair -->
-                <path d="M24 14 C24 4, 56 4, 56 14 L56 22 C56 22, 58 14, 54 10 C50 6, 30 6, 26 10 C22 14, 24 22, 24 22 Z" fill="var(--verde-escuro)"/>
-                <path d="M24 18 C22 28, 22 36, 26 38" stroke="var(--verde-escuro)" stroke-width="3" fill="none" stroke-linecap="round"/>
-                <path d="M56 18 C58 28, 58 36, 54 38" stroke="var(--verde-escuro)" stroke-width="3" fill="none" stroke-linecap="round"/>
-                <!-- Body / dress -->
-                <path d="M32 32 C32 32, 28 42, 24 70 L24 100 C24 102, 26 104, 28 104 L52 104 C54 104, 56 102, 56 100 L56 70 C52 42, 48 32, 48 32 Z" fill="var(--verde-medio)"/>
-                <!-- Waist shape -->
-                <path d="M30 52 C30 52, 40 48, 50 52" stroke="var(--verde-escuro)" stroke-width="1" fill="none" opacity="0.3"/>
-                <!-- Arms -->
-                <path d="M32 36 C26 44, 20 60, 18 68" stroke="var(--verde-medio)" stroke-width="5" fill="none" stroke-linecap="round"/>
-                <path d="M48 36 C54 44, 60 60, 62 68" stroke="var(--verde-medio)" stroke-width="5" fill="none" stroke-linecap="round"/>
-                <!-- Legs -->
-                <line x1="34" y1="104" x2="32" y2="126" stroke="var(--verde-medio)" stroke-width="5" stroke-linecap="round"/>
-                <line x1="46" y1="104" x2="48" y2="126" stroke="var(--verde-medio)" stroke-width="5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="gender-pct fem"><span class="counter" data-target="62" data-suffix=",6%">0</span></div>
-            <div class="gender-label">Feminino</div>
-          </div>
-
-          <div class="gender-figure">
-            <div class="gender-icon">
-              <svg width="80" height="130" viewBox="0 0 80 130">
-                <!-- Man silhouette -->
-                <circle cx="40" cy="18" r="14" fill="var(--laranja)"/>
-                <!-- Short hair -->
-                <path d="M26 16 C26 6, 54 6, 54 16 L54 12 C54 4, 26 4, 26 12 Z" fill="var(--cinza-escuro)"/>
-                <!-- Body / torso -->
-                <path d="M28 32 C28 32, 26 38, 24 50 L22 100 C22 102, 24 104, 26 104 L54 104 C56 104, 58 102, 58 100 L56 50 C54 38, 52 32, 52 32 Z" fill="var(--laranja)"/>
-                <!-- Shoulders -->
-                <path d="M28 32 C24 34, 18 40, 16 48" stroke="var(--laranja)" stroke-width="5" fill="none" stroke-linecap="round"/>
-                <path d="M52 32 C56 34, 62 40, 64 48" stroke="var(--laranja)" stroke-width="5" fill="none" stroke-linecap="round"/>
-                <!-- Arms -->
-                <path d="M16 48 C14 56, 16 64, 18 70" stroke="var(--laranja)" stroke-width="5" fill="none" stroke-linecap="round"/>
-                <path d="M64 48 C66 56, 64 64, 62 70" stroke="var(--laranja)" stroke-width="5" fill="none" stroke-linecap="round"/>
-                <!-- Legs -->
-                <rect x="28" y="104" width="10" height="22" rx="4" fill="var(--laranja-escuro)"/>
-                <rect x="42" y="104" width="10" height="22" rx="4" fill="var(--laranja-escuro)"/>
-              </svg>
-            </div>
-            <div class="gender-pct masc"><span class="counter" data-target="37" data-suffix=",2%">0</span></div>
-            <div class="gender-label">Masculino</div>
-          </div>
-        </div>
+    <!-- GENDER ICONS + PERCENTAGES -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:80px;margin:40px 0;" class="anim from-scale">
+      <!-- Feminino -->
+      <div style="text-align:center;">
+        <svg width="70" height="120" viewBox="0 0 70 120">
+          <circle cx="35" cy="14" r="12" fill="var(--verde-medio)"/>
+          <path d="M22 30 L18 72 Q35 82 52 72 L48 30 Q35 36 22 30Z" fill="var(--verde-medio)"/>
+          <path d="M22 30 L12 56" stroke="var(--verde-medio)" stroke-width="6" stroke-linecap="round"/>
+          <path d="M48 30 L58 56" stroke="var(--verde-medio)" stroke-width="6" stroke-linecap="round"/>
+          <line x1="30" y1="72" x2="28" y2="116" stroke="var(--verde-medio)" stroke-width="6" stroke-linecap="round"/>
+          <line x1="40" y1="72" x2="42" y2="116" stroke="var(--verde-medio)" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <div class="gender-pct fem"><span class="counter" data-target="62" data-suffix=",6%">0</span></div>
+        <div class="gender-label">Feminino</div>
+      </div>
+      <!-- Masculino -->
+      <div style="text-align:center;">
+        <svg width="70" height="120" viewBox="0 0 70 120">
+          <circle cx="35" cy="14" r="12" fill="var(--laranja)"/>
+          <rect x="20" y="30" width="30" height="42" rx="4" fill="var(--laranja)"/>
+          <path d="M20 32 L10 54" stroke="var(--laranja)" stroke-width="6" stroke-linecap="round"/>
+          <path d="M50 32 L60 54" stroke="var(--laranja)" stroke-width="6" stroke-linecap="round"/>
+          <rect x="22" y="72" width="11" height="44" rx="4" fill="var(--laranja-escuro)"/>
+          <rect x="37" y="72" width="11" height="44" rx="4" fill="var(--laranja-escuro)"/>
+        </svg>
+        <div class="gender-pct masc"><span class="counter" data-target="37" data-suffix=",2%">0</span></div>
+        <div class="gender-label">Masculino</div>
       </div>
     </div>
 
-    <!-- GRÁFICO FAIXA ETÁRIA -->
+    <!-- GRÁFICO FAIXA ETÁRIA - BARRAS LADO A LADO -->
     <div class="chart-container anim" style="max-width:800px;height:380px;">
       <canvas id="chartIdade"></canvas>
     </div>
@@ -931,19 +901,15 @@ chartOnScroll(document.getElementById('chartIdade'), {
     responsive: true, maintainAspectRatio: false,
     animation: delayedBarAnimation(6),
     scales: {
-      x: { stacked: true, grid: { display: false } },
-      y: { stacked: true, beginAtZero: true, grid: { color: '#EDF2F7' }, ticks: { callback: v => v + '%' } }
+      x: { grid: { display: false } },
+      y: { beginAtZero: true, grid: { color: '#EDF2F7' }, ticks: { callback: v => v + '%' } }
     },
     plugins: {
       datalabels: {
-        display: function(ctx) { return ctx.datasetIndex === 1; },
         anchor: 'end', align: 'end',
-        font: { weight: 'bold', size: 13 },
-        color: '#2D3748',
-        formatter: (v, ctx) => {
-          const totals = [5.1, 29.7, 32.9, 21.2, 8.1, 3.0];
-          return totals[ctx.dataIndex] + '%';
-        }
+        font: { weight: 'bold', size: 11 },
+        color: function(ctx) { return ctx.datasetIndex === 0 ? '#007A66' : '#F28C28'; },
+        formatter: v => v + '%'
       },
       legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
       tooltip: { backgroundColor: '#00594C', padding: 14, cornerRadius: 10 }
